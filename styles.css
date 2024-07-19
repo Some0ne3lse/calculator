@@ -1,0 +1,43 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+}
+
+.display-and-enter {
+  width: 20rem;
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid black;
+  height: 3rem;
+}
+
+.buttons {
+  display: flex;
+  margin-top: 1rem;
+  justify-content: space-between;
+}
+
+.numbers {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.last-number {
+  display: flex;
+  align-self: center;
+}
+
+.number-button {
+  font-size: xx-large;
+  margin: 0.25rem;
+  width: 3rem;
+}
+
+.operator-buttons {
+  font-size: xx-large;
+}
