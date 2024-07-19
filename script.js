@@ -100,25 +100,39 @@ subtractButton.addEventListener("click", () => {
 let multiplyButton = document.querySelector("#multiply");
 
 multiplyButton.addEventListener("click", () => {
-  if (firstNumber === undefined || secondNumber !== undefined) {
+  if (firstNumber === undefined) {
     return;
+  } else if (secondNumber !== undefined) {
+    firstNumber = operate(operator, firstNumber, secondNumber);
+    secondNumber = undefined;
+    operator = multiply;
+    numbersToDisplay = firstNumber + "x";
+    actualDisplay.textContent = numbersToDisplay;
+  } else {
+    numbersToDisplay = numbersToDisplay + "x";
+    actualDisplay.textContent = numbersToDisplay;
+    operator = multiply;
+    currentFocusOnStart = false;
   }
-  numbersToDisplay = numbersToDisplay + "x";
-  actualDisplay.textContent = numbersToDisplay;
-  operator = multiply;
-  currentFocusOnStart = false;
 });
 
 let divideButton = document.querySelector("#divide");
 
 divideButton.addEventListener("click", () => {
-  if (firstNumber === undefined || secondNumber !== undefined) {
+  if (firstNumber === undefined) {
     return;
+  } else if (secondNumber !== undefined) {
+    firstNumber = operate(operator, firstNumber, secondNumber);
+    secondNumber = undefined;
+    operator = divide;
+    numbersToDisplay = firstNumber + "/";
+    actualDisplay.textContent = numbersToDisplay;
+  } else {
+    numbersToDisplay = numbersToDisplay + "/";
+    actualDisplay.textContent = numbersToDisplay;
+    operator = divide;
+    currentFocusOnStart = false;
   }
-  numbersToDisplay = numbersToDisplay + "/";
-  actualDisplay.textContent = numbersToDisplay;
-  operator = divide;
-  currentFocusOnStart = false;
 });
 
 let resultButton = document.querySelector("#result");
@@ -127,11 +141,10 @@ resultButton.addEventListener("click", () => {
   if (firstNumber === undefined || secondNumber === undefined) {
     return;
   }
-  actualDisplay.textContent = `${numbersToDisplay} = ${operate(
-    operator,
-    firstNumber,
-    secondNumber
-  )}`;
+  let result = operate(operator, firstNumber, secondNumber);
+  actualDisplay.textContent = `${numbersToDisplay} = ${
+    Math.round((result + Number.EPSILON) * 100) / 100
+  }`;
   firstNumber = undefined;
   secondNumber = undefined;
   currentFocusOnStart = true;
