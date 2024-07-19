@@ -68,7 +68,8 @@ addButton.addEventListener("click", () => {
     firstNumber = operate(operator, firstNumber, secondNumber);
     secondNumber = undefined;
     operator = add;
-    numbersToDisplay = firstNumber + "+";
+    numbersToDisplay =
+      Math.round((firstNumber + Number.EPSILON) * 100) / 100 + "+";
     actualDisplay.textContent = numbersToDisplay;
   } else {
     numbersToDisplay = numbersToDisplay + "+";
@@ -87,7 +88,8 @@ subtractButton.addEventListener("click", () => {
     firstNumber = operate(operator, firstNumber, secondNumber);
     secondNumber = undefined;
     operator = subtract;
-    numbersToDisplay = firstNumber + "-";
+    numbersToDisplay =
+      Math.round((firstNumber + Number.EPSILON) * 100) / 100 + "-";
     actualDisplay.textContent = numbersToDisplay;
   } else {
     numbersToDisplay = numbersToDisplay + "-";
@@ -106,7 +108,8 @@ multiplyButton.addEventListener("click", () => {
     firstNumber = operate(operator, firstNumber, secondNumber);
     secondNumber = undefined;
     operator = multiply;
-    numbersToDisplay = firstNumber + "x";
+    numbersToDisplay =
+      Math.round((firstNumber + Number.EPSILON) * 100) / 100 + "x";
     actualDisplay.textContent = numbersToDisplay;
   } else {
     numbersToDisplay = numbersToDisplay + "x";
@@ -125,7 +128,8 @@ divideButton.addEventListener("click", () => {
     firstNumber = operate(operator, firstNumber, secondNumber);
     secondNumber = undefined;
     operator = divide;
-    numbersToDisplay = firstNumber + "/";
+    numbersToDisplay =
+      Math.round((firstNumber + Number.EPSILON) * 100) / 100 + "/";
     actualDisplay.textContent = numbersToDisplay;
   } else {
     numbersToDisplay = numbersToDisplay + "/";
