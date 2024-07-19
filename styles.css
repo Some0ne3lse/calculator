@@ -47,3 +47,10 @@ body {
   margin: 0.25rem;
   width: 3rem;
 }
+
+.clear-button,
+.result-button {
+  font-size: xx-large;
+  margin: 0.25rem;
+  width: 3rem;
+}
