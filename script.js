@@ -1,4 +1,7 @@
 let display = document.querySelector("#display");
+let numbers = document.querySelectorAll(".number-button");
+
+const actualDisplay = document.createElement("div");
 
 const add = (a, b) => {
   return a + b;
@@ -13,6 +16,9 @@ const multiply = (a, b) => {
 };
 
 const divide = (a, b) => {
+  if (b === 0) {
+    return NaN;
+  }
   return a / b;
 };
 
@@ -29,10 +35,6 @@ let currentFocusOnStart = true;
 const operate = (operator, num1, num2) => {
   return operator(+num1, +num2);
 };
-
-let numbers = document.querySelectorAll(".number-button");
-
-const actualDisplay = document.createElement("div");
 
 numbers.forEach((number) => {
   number.addEventListener("click", (event) => {
