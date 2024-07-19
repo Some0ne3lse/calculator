@@ -1,3 +1,5 @@
+let display = document.querySelector("#display");
+
 const add = (a, b) => {
   return a + b;
 };
@@ -20,7 +22,7 @@ let secondNumber;
 
 let operator;
 
-let displayValue = "";
+let numbersToDisplay = "";
 
 let currentFocusOnStart = true;
 
@@ -30,6 +32,8 @@ const operate = (operator, num1, num2) => {
 
 let numbers = document.querySelectorAll(".number-button");
 
+const actualDisplay = document.createElement("div");
+
 numbers.forEach((number) => {
   number.addEventListener("click", (event) => {
     let currentNumber = event.target.id;
@@ -37,25 +41,32 @@ numbers.forEach((number) => {
     if (currentFocusOnStart === true) {
       if (firstNumber === undefined) {
         firstNumber = currentNumber;
+        numbersToDisplay = firstNumber.toString();
       } else {
         firstNumber = firstNumber + currentNumber;
-        // displayValue = firstNumber.toString();
+        numbersToDisplay = firstNumber.toString();
       }
-      console.log(firstNumber);
     } else if (currentFocusOnStart === false) {
       if (secondNumber === undefined) {
         secondNumber = currentNumber;
+        numbersToDisplay = numbersToDisplay + currentNumber.toString();
       } else {
         secondNumber = secondNumber + currentNumber;
+        numbersToDisplay = numbersToDisplay + currentNumber.toString();
       }
-      console.log(secondNumber);
     }
+    actualDisplay.textContent = numbersToDisplay;
   });
 });
 
 let addButton = document.querySelector("#add");
 
 addButton.addEventListener("click", () => {
+  if (firstNumber === undefined || secondNumber !== undefined) {
+    return;
+  }
+  numbersToDisplay = numbersToDisplay + "+";
+  actualDisplay.textContent = numbersToDisplay;
   operator = add;
   currentFocusOnStart = false;
 });
@@ -63,6 +74,11 @@ addButton.addEventListener("click", () => {
 let subtractButton = document.querySelector("#subtract");
 
 subtractButton.addEventListener("click", () => {
+  if (firstNumber === undefined || secondNumber !== undefined) {
+    return;
+  }
+  numbersToDisplay = numbersToDisplay + "-";
+  actualDisplay.textContent = numbersToDisplay;
   operator = subtract;
   currentFocusOnStart = false;
 });
@@ -70,6 +86,11 @@ subtractButton.addEventListener("click", () => {
 let multiplyButton = document.querySelector("#multiply");
 
 multiplyButton.addEventListener("click", () => {
+  if (firstNumber === undefined || secondNumber !== undefined) {
+    return;
+  }
+  numbersToDisplay = numbersToDisplay + "x";
+  actualDisplay.textContent = numbersToDisplay;
   operator = multiply;
   currentFocusOnStart = false;
 });
@@ -77,6 +98,11 @@ multiplyButton.addEventListener("click", () => {
 let divideButton = document.querySelector("#divide");
 
 divideButton.addEventListener("click", () => {
+  if (firstNumber === undefined || secondNumber !== undefined) {
+    return;
+  }
+  numbersToDisplay = numbersToDisplay + "/";
+  actualDisplay.textContent = numbersToDisplay;
   operator = divide;
   currentFocusOnStart = false;
 });
@@ -84,7 +110,26 @@ divideButton.addEventListener("click", () => {
 let resultButton = document.querySelector("#result");
 
 resultButton.addEventListener("click", () => {
-  console.log(firstNumber);
-  console.log(secondNumber);
-  console.log(operate(operator, firstNumber, secondNumber));
+  if (firstNumber === undefined || secondNumber === undefined) {
+    return;
+  }
+  actualDisplay.textContent = `${numbersToDisplay} = ${operate(
+    operator,
+    firstNumber,
+    secondNumber
+  )}`;
+  firstNumber = undefined;
+  secondNumber = undefined;
+  currentFocusOnStart = true;
 });
+
+let clearButton = document.querySelector("#clear");
+
+clearButton.addEventListener("click", () => {
+  firstNumber = undefined;
+  secondNumber = undefined;
+  currentFocusOnStart = true;
+  actualDisplay.textContent = "";
+});
+
+display.appendChild(actualDisplay);

@@ -9,7 +9,8 @@ body {
 .display-and-enter {
   width: 20rem;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
   border: 1px solid black;
   height: 3rem;
 }
