@@ -62,13 +62,20 @@ numbers.forEach((number) => {
 let addButton = document.querySelector("#add");
 
 addButton.addEventListener("click", () => {
-  if (firstNumber === undefined || secondNumber !== undefined) {
+  if (firstNumber === undefined) {
     return;
+  } else if (secondNumber !== undefined) {
+    firstNumber = operate(add, firstNumber, secondNumber);
+    secondNumber = undefined;
+    operator = add;
+    numbersToDisplay = firstNumber + "+";
+    actualDisplay.textContent = numbersToDisplay;
+  } else {
+    numbersToDisplay = numbersToDisplay + "+";
+    actualDisplay.textContent = numbersToDisplay;
+    operator = add;
+    currentFocusOnStart = false;
   }
-  numbersToDisplay = numbersToDisplay + "+";
-  actualDisplay.textContent = numbersToDisplay;
-  operator = add;
-  currentFocusOnStart = false;
 });
 
 let subtractButton = document.querySelector("#subtract");
