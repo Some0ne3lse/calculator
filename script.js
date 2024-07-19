@@ -65,7 +65,7 @@ addButton.addEventListener("click", () => {
   if (firstNumber === undefined) {
     return;
   } else if (secondNumber !== undefined) {
-    firstNumber = operate(add, firstNumber, secondNumber);
+    firstNumber = operate(operator, firstNumber, secondNumber);
     secondNumber = undefined;
     operator = add;
     numbersToDisplay = firstNumber + "+";
@@ -81,13 +81,20 @@ addButton.addEventListener("click", () => {
 let subtractButton = document.querySelector("#subtract");
 
 subtractButton.addEventListener("click", () => {
-  if (firstNumber === undefined || secondNumber !== undefined) {
+  if (firstNumber === undefined) {
     return;
+  } else if (secondNumber !== undefined) {
+    firstNumber = operate(operator, firstNumber, secondNumber);
+    secondNumber = undefined;
+    operator = subtract;
+    numbersToDisplay = firstNumber + "-";
+    actualDisplay.textContent = numbersToDisplay;
+  } else {
+    numbersToDisplay = numbersToDisplay + "-";
+    actualDisplay.textContent = numbersToDisplay;
+    operator = subtract;
+    currentFocusOnStart = false;
   }
-  numbersToDisplay = numbersToDisplay + "-";
-  actualDisplay.textContent = numbersToDisplay;
-  operator = subtract;
-  currentFocusOnStart = false;
 });
 
 let multiplyButton = document.querySelector("#multiply");
