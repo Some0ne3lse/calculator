@@ -51,7 +51,7 @@ numbers.forEach((number) => {
     } else if (currentFocusOnStart === false) {
       if (secondNumber === undefined) {
         secondNumber = currentNumber;
-        numbersToDisplay = numbersToDisplay + currentNumber.toString();
+        numbersToDisplay = currentNumber.toString();
       } else {
         secondNumber = secondNumber + currentNumber;
         numbersToDisplay = numbersToDisplay + currentNumber.toString();
