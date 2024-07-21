@@ -45,16 +45,34 @@ numbers.forEach((number) => {
         firstNumber = currentNumber;
         numbersToDisplay = firstNumber.toString();
       } else {
-        firstNumber = firstNumber + currentNumber;
-        numbersToDisplay = firstNumber.toString();
+        if (firstNumber.toString().includes(".")) {
+          if (currentNumber.toString() === ".") {
+            firstNumber = firstNumber;
+          } else {
+            firstNumber = firstNumber + currentNumber;
+            numbersToDisplay = firstNumber.toString();
+          }
+        } else {
+          firstNumber = firstNumber + currentNumber;
+          numbersToDisplay = firstNumber.toString();
+        }
       }
     } else if (currentFocusOnStart === false) {
       if (secondNumber === undefined) {
         secondNumber = currentNumber;
         numbersToDisplay = currentNumber.toString();
       } else {
-        secondNumber = secondNumber + currentNumber;
-        numbersToDisplay = numbersToDisplay + currentNumber.toString();
+        if (secondNumber.toString().includes(".")) {
+          if (currentNumber.toString() === ".") {
+            secondNumber = secondNumber;
+          } else {
+            secondNumber = secondNumber + currentNumber;
+            numbersToDisplay = numbersToDisplay + currentNumber.toString();
+          }
+        } else {
+          secondNumber = secondNumber + currentNumber;
+          numbersToDisplay = numbersToDisplay + currentNumber.toString();
+        }
       }
     }
     actualDisplay.textContent = numbersToDisplay;

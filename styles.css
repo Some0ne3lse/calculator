@@ -43,6 +43,10 @@ body {
   font-size: xx-large;
 }
 
+.operator-button:focus {
+  background-color: grey;
+}
+
 .operator-button {
   font-size: xx-large;
   margin: 0.25rem;
