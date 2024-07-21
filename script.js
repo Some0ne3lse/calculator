@@ -60,18 +60,18 @@ numbers.forEach((number) => {
     } else if (currentFocusOnStart === false) {
       if (secondNumber === undefined) {
         secondNumber = currentNumber;
-        numbersToDisplay = currentNumber.toString();
+        numbersToDisplay = secondNumber.toString();
       } else {
         if (secondNumber.toString().includes(".")) {
           if (currentNumber.toString() === ".") {
             secondNumber = secondNumber;
           } else {
             secondNumber = secondNumber + currentNumber;
-            numbersToDisplay = numbersToDisplay + currentNumber.toString();
+            numbersToDisplay = secondNumber + currentNumber.toString();
           }
         } else {
           secondNumber = secondNumber + currentNumber;
-          numbersToDisplay = numbersToDisplay + currentNumber.toString();
+          numbersToDisplay = secondNumber.toString();
         }
       }
     }
@@ -176,6 +176,28 @@ clearButton.addEventListener("click", () => {
   secondNumber = undefined;
   currentFocusOnStart = true;
   actualDisplay.textContent = "";
+});
+
+let deleteButton = document.querySelector("#delete");
+
+deleteButton.addEventListener("click", () => {
+  if (currentFocusOnStart === true) {
+    if (firstNumber == null) {
+      return;
+    }
+    let numberToString = firstNumber.toString();
+    numberToString = numberToString.slice(0, -1);
+    firstNumber = Number(numberToString);
+    actualDisplay.textContent = firstNumber;
+  } else if (currentFocusOnStart === false) {
+    if (secondNumber == null) {
+      return;
+    }
+    let numberToString = secondNumber.toString();
+    numberToString = numberToString.slice(0, -1);
+    secondNumber = Number(numberToString);
+    actualDisplay.textContent = secondNumber;
+  }
 });
 
 display.appendChild(actualDisplay);
