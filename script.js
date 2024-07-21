@@ -17,7 +17,7 @@ const multiply = (a, b) => {
 
 const divide = (a, b) => {
   if (b === 0) {
-    return NaN;
+    return "Dividing by 0 is illegal!";
   }
   return a / b;
 };
@@ -70,12 +70,9 @@ addButton.addEventListener("click", () => {
     firstNumber = operate(operator, firstNumber, secondNumber);
     secondNumber = undefined;
     operator = add;
-    numbersToDisplay =
-      Math.round((firstNumber + Number.EPSILON) * 100) / 100 + "+";
+    numbersToDisplay = Math.round((firstNumber + Number.EPSILON) * 100) / 100;
     actualDisplay.textContent = numbersToDisplay;
   } else {
-    numbersToDisplay = numbersToDisplay + "+";
-    actualDisplay.textContent = numbersToDisplay;
     operator = add;
     currentFocusOnStart = false;
   }
@@ -90,12 +87,9 @@ subtractButton.addEventListener("click", () => {
     firstNumber = operate(operator, firstNumber, secondNumber);
     secondNumber = undefined;
     operator = subtract;
-    numbersToDisplay =
-      Math.round((firstNumber + Number.EPSILON) * 100) / 100 + "-";
+    numbersToDisplay = Math.round((firstNumber + Number.EPSILON) * 100) / 100;
     actualDisplay.textContent = numbersToDisplay;
   } else {
-    numbersToDisplay = numbersToDisplay + "-";
-    actualDisplay.textContent = numbersToDisplay;
     operator = subtract;
     currentFocusOnStart = false;
   }
@@ -110,12 +104,9 @@ multiplyButton.addEventListener("click", () => {
     firstNumber = operate(operator, firstNumber, secondNumber);
     secondNumber = undefined;
     operator = multiply;
-    numbersToDisplay =
-      Math.round((firstNumber + Number.EPSILON) * 100) / 100 + "x";
+    numbersToDisplay = Math.round((firstNumber + Number.EPSILON) * 100) / 100;
     actualDisplay.textContent = numbersToDisplay;
   } else {
-    numbersToDisplay = numbersToDisplay + "x";
-    actualDisplay.textContent = numbersToDisplay;
     operator = multiply;
     currentFocusOnStart = false;
   }
@@ -128,14 +119,15 @@ divideButton.addEventListener("click", () => {
     return;
   } else if (secondNumber !== undefined) {
     firstNumber = operate(operator, firstNumber, secondNumber);
-    secondNumber = undefined;
-    operator = divide;
-    numbersToDisplay =
-      Math.round((firstNumber + Number.EPSILON) * 100) / 100 + "/";
+    if (typeof firstNumber === "string") {
+      numbersToDisplay = firstNumber;
+    } else {
+      secondNumber = undefined;
+      operator = divide;
+      numbersToDisplay = Math.round((firstNumber + Number.EPSILON) * 100) / 100;
+    }
     actualDisplay.textContent = numbersToDisplay;
   } else {
-    numbersToDisplay = numbersToDisplay + "/";
-    actualDisplay.textContent = numbersToDisplay;
     operator = divide;
     currentFocusOnStart = false;
   }
@@ -148,9 +140,12 @@ resultButton.addEventListener("click", () => {
     return;
   }
   let result = operate(operator, firstNumber, secondNumber);
-  actualDisplay.textContent = `${numbersToDisplay} = ${
-    Math.round((result + Number.EPSILON) * 100) / 100
-  }`;
+  if (typeof result === "string") {
+    numbersToDisplay = result;
+  } else {
+    numbersToDisplay = Math.round((result + Number.EPSILON) * 100) / 100;
+  }
+  actualDisplay.textContent = numbersToDisplay;
   firstNumber = undefined;
   secondNumber = undefined;
   currentFocusOnStart = true;
